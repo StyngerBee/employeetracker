@@ -82,3 +82,30 @@ const addEmployee = function () {
             ]
         }
     ])
+    .then(answers => {
+        db.query(`INSERT INTO employee SET ?`, answers, function (err, result) {
+            console.log(`${answers.first_name} ${answers.last_name} added to Roles.`);
+            initialQuestion();
+        });
+    })
+}
+
+// function for running the first question to begin inquirer  //
+const firstQuestion = function () {
+
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'todo',
+            message: 'What would you like to do?',
+            choices: [
+                'View all departments',
+                'View all roles',
+                'View all employees',
+                'Add a department',
+                'Add a role',
+                'Add an employee',
+                'Update an employee',
+            ],
+        }
+    ])
