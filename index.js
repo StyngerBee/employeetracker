@@ -10,7 +10,6 @@ const db = mysql.createConnection(
     },
     console.log(`Connected to the universe_db.`)
 );
-
 // runs questions for adding a department //
 const addDept = function () {
     inquirer.prompt([
@@ -109,3 +108,30 @@ const firstQuestion = function () {
             ],
         }
     ])
+    .then(answers => {
+        console.log(answers);
+
+        if (answers.todo === 'Add a department') {
+            addDept();
+        } else if (answers.todo === 'Add a role') {
+            addRole();
+        } else if (answers.todo === 'Add an employee') {
+            addEmployee();
+        } else if (answers.todo === 'View all departments') {
+            db.query('SELECT * FROM department', function (err, department) {
+                console.table(department);
+                firstQuestion();
+            });
+        } else if (answers.todo === 'View all roles') {
+            db.query('SELECT * FROM role', function (err, role) {
+                console.table(role);
+                firstQuestion();
+            });
+        } else if (answers.todo === 'View all employees') {
+            db.query('SELECT * FROM employee', function (err, employee) {
+                console.table(employee);
+                firstQuestion();
+            });
+        }
+    });
+};
