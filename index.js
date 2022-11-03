@@ -10,3 +10,19 @@ const db = mysql.createConnection(
     },
     console.log(`Connected to the universe_db.`)
 );
+
+// runs questions for adding a department //
+const addDept = function () {
+    inquirer.prompt([
+        {
+            name: 'name',
+            message: 'What is the department name?',
+        },
+    ])
+        .then(answers => {
+            db.query(`INSERT INTO department SET ?`, answers, function (err, result) {
+                console.log(`${answers.name} added to Departments.`);
+                initialQuestion();
+            });
+        })
+}
