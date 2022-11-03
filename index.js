@@ -50,4 +50,10 @@ const addRole = function () {
             ]
         }
     ])
- 
+    .then(answers => {
+        db.query(`INSERT INTO role SET ?`, answers, function (err, result) {
+            console.log(`${answers.title} added to Employees.`);
+            initialQuestion();
+        });
+    })
+}
