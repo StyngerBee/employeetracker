@@ -135,3 +135,6 @@ const firstQuestion = function () {
         }
     });
 };
+
+// initializes program
+firstQuestion();
