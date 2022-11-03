@@ -26,3 +26,28 @@ const addDept = function () {
             });
         })
 }
+
+const addRole = function () {
+    inquirer.prompt([
+        {
+            name: 'title',
+            message: 'What is the role\'s title?',
+        },
+        {
+            name: 'salary',
+            message: 'What is the role\'s salary?'
+        },
+        {
+            type: 'list',
+            name: 'department',
+            message: 'What department does this role belong to?',
+            choices: [
+                'Middle Earth',
+                'Hogwarts',
+                'Westeros',
+                'The Four Nations',
+                
+            ]
+        }
+    ])
+ 
