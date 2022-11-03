@@ -10,31 +10,33 @@ const db = mysql.createConnection(
     },
     console.log(`Connected to the universe_db.`)
 );
+
 // runs questions for adding a department //
 const addDept = function () {
     inquirer.prompt([
         {
             name: 'name',
-            message: 'What is the department name?',
+            message: 'What is your department?',
         },
     ])
         .then(answers => {
             db.query(`INSERT INTO department SET ?`, answers, function (err, result) {
-                console.log(`${answers.name} added to Departments.`);
-                initialQuestion();
+                console.log(`${answers.name} added to departments.`);
+                firstQuestion();
             });
         })
 }
 
+// function to inquire about role and it's salary, and adds it to a department
 const addRole = function () {
     inquirer.prompt([
         {
             name: 'title',
-            message: 'What is the role\'s title?',
+            message: `What is your role?`,
         },
         {
             name: 'salary',
-            message: 'What is the role\'s salary?'
+            message: `What is your salary?`
         },
         {
             type: 'list',
@@ -51,21 +53,22 @@ const addRole = function () {
     ])
     .then(answers => {
         db.query(`INSERT INTO role SET ?`, answers, function (err, result) {
-            console.log(`${answers.title} added to Employees.`);
-            initialQuestion();
+            console.log(`${answers.title} added to employees.`);
+            firstQuestion();
         });
     })
 }
 
+// addEmployee function to inquire about employee data such as first name/ last name and their role/department
 const addEmployee = function () {
     inquirer.prompt([
         {
             name: 'first_name',
-            message: 'What is the employee\'s first name?',
+            message: `What is their first name?`,
         },
         {
             name: 'last_name',
-            message: 'What is the employee\'s last name?'
+            message: `What is their last name?`
         },
         {
             type: 'list',
@@ -74,7 +77,7 @@ const addEmployee = function () {
             choices: [
                 'Hobbit',
                 'Wizard',
-                'Brother of the Night\'s Watch',
+                `Brother of the Night's Watch`,
                 'Fire Nation',
                 'Water Nation',
                 'Earth Nation'
@@ -83,8 +86,8 @@ const addEmployee = function () {
     ])
     .then(answers => {
         db.query(`INSERT INTO employee SET ?`, answers, function (err, result) {
-            console.log(`${answers.first_name} ${answers.last_name} added to Roles.`);
-            initialQuestion();
+            console.log(`${answers.first_name} ${answers.last_name} added to roles.`);
+            firstQuestion();
         });
     })
 }
@@ -101,33 +104,37 @@ const firstQuestion = function () {
                 'View all departments',
                 'View all roles',
                 'View all employees',
-                'Add a department',
-                'Add a role',
-                'Add an employee',
-                'Update an employee',
+                'Add department',
+                'Add role',
+                'Add employee',
             ],
         }
     ])
     .then(answers => {
         console.log(answers);
 
-        if (answers.todo === 'Add a department') {
+        if (answers.todo === 'Add department') {
             addDept();
-        } else if (answers.todo === 'Add a role') {
+        } 
+        else if (answers.todo === 'Add role') {
             addRole();
-        } else if (answers.todo === 'Add an employee') {
+        } 
+        else if (answers.todo === 'Add employee') {
             addEmployee();
-        } else if (answers.todo === 'View all departments') {
+        } 
+        else if (answers.todo === 'View your departments') {
             db.query('SELECT * FROM department', function (err, department) {
                 console.table(department);
                 firstQuestion();
             });
-        } else if (answers.todo === 'View all roles') {
+        } 
+        else if (answers.todo === 'View your roles') {
             db.query('SELECT * FROM role', function (err, role) {
                 console.table(role);
                 firstQuestion();
             });
-        } else if (answers.todo === 'View all employees') {
+        } 
+        else if (answers.todo === 'View your employees') {
             db.query('SELECT * FROM employee', function (err, employee) {
                 console.table(employee);
                 firstQuestion();
