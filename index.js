@@ -57,3 +57,28 @@ const addRole = function () {
         });
     })
 }
+
+const addEmployee = function () {
+    inquirer.prompt([
+        {
+            name: 'first_name',
+            message: 'What is the employee\'s first name?',
+        },
+        {
+            name: 'last_name',
+            message: 'What is the employee\'s last name?'
+        },
+        {
+            type: 'list',
+            name: 'role',
+            message: 'What is the role of this employee?',
+            choices: [
+                'Hobbit',
+                'Wizard',
+                'Brother of the Night\'s Watch',
+                'Fire Nation',
+                'Water Nation',
+                'Earth Nation'
+            ]
+        }
+    ])
