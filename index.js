@@ -55,7 +55,7 @@ const addRole = function () {
         }
     ])
     .then(answers => {
-        db.query(`INSERT INTO roles(title, salary, department_id) VALUES('${answers.title}', '${answers.salary}','${answers.department}'`, function (err, results) {
+        db.query(`INSERT INTO roles(title, salary, department_id) VALUES('${answers.title}, ${answers.salary}, ${answers.department}')`, function (err, results) {
             console.log(`${answers.title} added to employees.`);
             firstQuestion();
         });
@@ -87,10 +87,21 @@ const addEmployee = function () {
                 'Water Nation',
                 'Earth Nation'
             ]
+        },
+        {  
+            type: 'list',
+            name: 'manager',
+            message: 'Who is your manager?',
+            choices: [
+                'Avatar Aang',
+                'Gandalf the Grey',
+                'Albus Dumbledore',
+                'Bran Stark'
+            ]
         }
     ])
     .then(answers => {
-        db.query('INSERT INTO employee SET ?', answers, function (err, results) {
+        db.query(`INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES('${answers.first_name}, ${answers.last_name}, ${answers.role}, ${answers.manager}')`, function (err, results) {
             console.log(`${answers.first_name} ${answers.last_name} added to roles.`);
             firstQuestion();
         });
