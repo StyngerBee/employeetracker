@@ -15,6 +15,7 @@ const db = mysql.createConnection(
 const addDept = function () {
     inquirer.prompt([
         {
+            type: 'input',
             name: 'name',
             message: 'What is your department?',
         },
@@ -31,10 +32,12 @@ const addDept = function () {
 const addRole = function () {
     inquirer.prompt([
         {
+            type: 'input',
             name: 'title',
             message: `What is your role?`,
         },
         {
+            type: 'input',
             name: 'salary',
             message: `What is your salary?`
         },
@@ -63,10 +66,12 @@ const addRole = function () {
 const addEmployee = function () {
     inquirer.prompt([
         {
+            type: 'input',
             name: 'first_name',
             message: `What is their first name?`,
         },
         {
+            type: 'input',
             name: 'last_name',
             message: `What is their last name?`
         },
