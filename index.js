@@ -21,7 +21,7 @@ const addDept = function () {
         },
     ])
         .then(answers => {
-            db.query('INSERT INTO department SET ?', answers, function (err, results) {
+            db.query(`INSERT INTO department(names) VALUES('${answers.name}')`, function (err, results) {
                 console.log(`${answers.name} added to departments.`);
                 firstQuestion();
             });
@@ -55,7 +55,7 @@ const addRole = function () {
         }
     ])
     .then(answers => {
-        db.query('INSERT INTO roles SET ?', answers, function (err, results) {
+        db.query(`INSERT INTO roles(title, salary, department_id) VALUES('${answers.title}', '${answers.salary}','${answers.department}'`, function (err, results) {
             console.log(`${answers.title} added to employees.`);
             firstQuestion();
         });
@@ -90,7 +90,7 @@ const addEmployee = function () {
         }
     ])
     .then(answers => {
-        db.query('INSERT INTO employee SET ?', answers, function (err, result) {
+        db.query('INSERT INTO employee SET ?', answers, function (err, results) {
             console.log(`${answers.first_name} ${answers.last_name} added to roles.`);
             firstQuestion();
         });
